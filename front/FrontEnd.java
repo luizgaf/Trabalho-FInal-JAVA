@@ -5,10 +5,8 @@ import javax.swing.*;
 public class FrontEnd extends JPanel{
     
     public FrontEnd(){
-        JFrame frame = new JFrame("Banco");
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        JLabel label = new JLabel("Bem-vindo ao Banco");
+        add(label);
     }
 
 
@@ -18,7 +16,15 @@ public class FrontEnd extends JPanel{
     }  
 
     public static void main(String[] args) {
-        FrontEnd FE = new FrontEnd();
-        FE.setVisible(true);
+        JFrame frame = new JFrame("Banco");
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        
+        FrontEnd frontEnd = new FrontEnd();
+        frame.add(frontEnd);
+
+        
+        frame.setVisible(true);
     }
 }
