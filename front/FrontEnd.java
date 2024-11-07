@@ -1,83 +1,63 @@
 package front;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.Border;
+import javax.swing.JButton.*;
+import javax.swing.border.*;
 
 public class FrontEnd extends JPanel{
-
-    private JButton botaoDeposito;
-    private JButton botaoSaque;
-    private JButton botaoPix;
     
+    private FrontEndCadastro cadastroPanel;
+
+    private JButton verCadastro, adcCadastro;
+
     public FrontEnd(){
         setLayout(new BorderLayout());
 
-        JLabel label = new JLabel("Bem-vindo ao Banco", JLabel.CENTER);
+        JLabel label = new JLabel("Defesa Civil | Gerenciamento de Famílias", JLabel.CENTER);
         label.setFont(new Font("Arial", Font.BOLD, 24));
         label.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         add(label, BorderLayout.NORTH);
 
         JPanel botoesPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 30));
 
-        botaoDeposito = new JButton("Depositar");
-        botaoSaque = new JButton("Sacar");
-        botaoPix = new JButton("Transferir");
+        verCadastro = new JButton("Ver Cadastros");
+        adcCadastro = new JButton("Adicionar Cadastros");
 
-        // Centralizando os botões
-        botaoDeposito.setAlignmentX(Component.CENTER_ALIGNMENT);
-        botaoPix.setAlignmentX(Component.CENTER_ALIGNMENT);
-        botaoSaque.setAlignmentX(Component.CENTER_ALIGNMENT);
+        addHoverEffect(verCadastro);
+        addHoverEffect(adcCadastro);
 
-        // cor e fonte
-        addHoverEffect(botaoDeposito);
-        addHoverEffect(botaoPix);
-        addHoverEffect(botaoSaque);
-
-        Border buttonBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
-
-        botaoDeposito.setBorder(buttonBorder);
-        botaoPix.setBorder(buttonBorder);
-        botaoSaque.setBorder(buttonBorder);
-
-
-         // Adicionando espaçamento entre os botões e o painel
-        botoesPanel.add(botaoDeposito);
-        botoesPanel.add(botaoPix);
-        botoesPanel.add(botaoSaque);
+        botoesPanel.add(verCadastro);
+        botoesPanel.add(adcCadastro);
 
         add(botoesPanel, BorderLayout.CENTER);
 
-        botaoDeposito.addActionListener(new ActionListener(){
+        adcCadastro.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e){
-                JOptionPane.showMessageDialog(null, "TEste deposito");
-            }
-        });
-
-        botaoPix.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e){
-                JOptionPane.showMessageDialog(null, "TEste Pix");
-            }
-        });
-
-        botaoSaque.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e){
-                JOptionPane.showMessageDialog(null, "TEste Saque");
+            public void actionPerformed(ActionEvent e) {
+                janelaCadastro();
             }
         });
     }
-    private void addHoverEffect(JButton button) {
+
+    private void janelaCadastro(){
+        JFrame frameCadastro = new JFrame("Cadastro de Família");
+        frameCadastro.setSize(800, 600);
+        frameCadastro.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        cadastroPanel = new FrontEndCadastro(frameCadastro);
+        frameCadastro.add(cadastroPanel);
+
+        frameCadastro.setLocationRelativeTo(null);
+        frameCadastro.setVisible(true);
+    }
+
+    public void addHoverEffect(JButton button) {
         button.setBackground(new Color(50,50,50));
         button.setForeground(Color.white);
         button.setFont(new Font("Arial", Font.BOLD, 14));
-        button.setPreferredSize(new Dimension(120, 50));
+        button.setPreferredSize(new Dimension(200, 50));
 
         button.addMouseListener(new MouseAdapter() {
             @Override
