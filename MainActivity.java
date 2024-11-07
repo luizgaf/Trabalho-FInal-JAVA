@@ -3,7 +3,7 @@ import javax.swing.*;
 
 public class MainActivity{
     public static void main(String[] args){
-        JFrame frame = new JFrame("Banco");
+        JFrame frame = new JFrame("Defesa Civil");
         frame.setSize(800, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
