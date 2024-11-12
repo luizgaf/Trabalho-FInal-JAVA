@@ -8,9 +8,9 @@ public class MainActivity{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // painel
-        FrontEnd frontEndPanel = new FrontEnd();
+        FrontEnd frontEndPanel = new FrontEnd(frame);
         frame.add(frontEndPanel);
-
+        frame.setLocationRelativeTo(null);
         // Exibindo a janela
         frame.setVisible(true);
     }

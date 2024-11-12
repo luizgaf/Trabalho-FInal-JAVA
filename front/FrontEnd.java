@@ -3,16 +3,14 @@ package front;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.JButton.*;
-import javax.swing.border.*;
 
 public class FrontEnd extends JPanel{
     
     private FrontEndCadastro cadastroPanel;
 
-    private JButton verCadastro, adcCadastro;
+    private JButton verCadastro, adcCadastro, btnSair;
 
-    public FrontEnd(){
+    public FrontEnd(JFrame frame){
         setLayout(new BorderLayout());
 
         JLabel label = new JLabel("Defesa Civil | Gerenciamento de Famílias", JLabel.CENTER);
@@ -24,12 +22,17 @@ public class FrontEnd extends JPanel{
 
         verCadastro = new JButton("Ver Cadastros");
         adcCadastro = new JButton("Adicionar Cadastros");
+        btnSair = new JButton("Sair");
 
         addHoverEffect(verCadastro);
         addHoverEffect(adcCadastro);
+        addHoverEffect(btnSair);
 
         botoesPanel.add(verCadastro);
         botoesPanel.add(adcCadastro);
+        botoesPanel.add(btnSair);
+
+        btnSair.addActionListener(e -> btnSair(frame));
 
         add(botoesPanel, BorderLayout.CENTER);
 
@@ -43,7 +46,7 @@ public class FrontEnd extends JPanel{
 
     private void janelaCadastro(){
         JFrame frameCadastro = new JFrame("Cadastro de Família");
-        frameCadastro.setSize(800, 600);
+        frameCadastro.setSize(800, 300);
         frameCadastro.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         cadastroPanel = new FrontEndCadastro(frameCadastro);
@@ -51,6 +54,10 @@ public class FrontEnd extends JPanel{
 
         frameCadastro.setLocationRelativeTo(null);
         frameCadastro.setVisible(true);
+    }
+
+    public void btnSair(JFrame frame){
+        frame.dispose();
     }
 
     public void addHoverEffect(JButton button) {
