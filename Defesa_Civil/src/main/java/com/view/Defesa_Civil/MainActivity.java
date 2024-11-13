@@ -4,6 +4,7 @@ import javax.swing.*;
 
 public class MainActivity{
     public static void main(String[] args){
+        connectBanco defesacivil = new connectBanco();
         JFrame frame = new JFrame("Defesa Civil");
         frame.setSize(800, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
