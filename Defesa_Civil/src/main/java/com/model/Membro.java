@@ -1,17 +1,41 @@
 package com.model;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table(name="membro")
 public class Membro {
+
+    @Id
+    @Column(name = "CPF", unique = true)
     private String CPF;
+
+    @Column(name = "nome", nullable = false)
     private String nome;
+
+    @Column(name = "numTelefone", nullable = false)
     private String numTelefone;
+
+    @Column(name = " dataNasc", nullable = false)
     private LocalDate DataNasc;
+
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
+
+    @Column(name = "telEmergencia", nullable = false)
     private String numEmergencia;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Endereco_id", referencedColumnName = "idEndereco")
     private Endereco endereco;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "CadastroFamilia_id", referencedColumnName = "idFamilia", nullable = false)
     private CadastroFamilia cadastroFamilia;
 
-    public Membro(){}
+
+    public Membro() {}
 
     public Membro(String CPF, String nome, String numTelefone, LocalDate DataNasc, String email, String numEmergencia, Endereco endereco, CadastroFamilia cadastroFamilia){
         this.CPF = CPF;
@@ -20,6 +44,8 @@ public class Membro {
         this.DataNasc = DataNasc;
         this.email = email;
         this.numEmergencia = numEmergencia;
+        this.endereco = endereco;
+        this.cadastroFamilia = cadastroFamilia;
     }
 
     public String getCPF() {
@@ -30,9 +56,10 @@ public class Membro {
         this.CPF = CPF;
     }
 
-     public String getNome(){
+    public String getNome(){
         return nome;
     }
+
     public void setNome(String nome) {
         this.nome = nome;
     }

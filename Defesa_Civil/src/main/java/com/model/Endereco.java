@@ -1,16 +1,35 @@
 package com.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Endereco")
 public class Endereco {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idEndereco")
     private int idEndereco;
+
+    @Column(name = "logradouro", nullable = false, length = 100)
     private String logradouro;
+
+    @Column(name = "numero", nullable = false)
     private int numero;
+
+    @Column(name = "cidade", nullable = false, length = 50)
     private String cidade;
+
+    @Column(name = "CEP", nullable = false, length = 8)
     private String CEP;
+
+    @Column(name = "complemento", length = 100)
     private String complemento;
 
-    public Endereco(){}
 
-    public Endereco(int idEndereco, String logradouro, int numero, String cidade, String CEP, String complemento){
+    public Endereco() {}
+
+    public Endereco(int idEndereco, String logradouro, int numero, String cidade, String CEP, String complemento) {
         this.idEndereco = idEndereco;
         this.logradouro = logradouro;
         this.numero = numero;

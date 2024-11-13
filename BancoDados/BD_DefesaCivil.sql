@@ -49,7 +49,8 @@ CREATE TABLE IF NOT EXISTS CadastroFamilia(
 CREATE TABLE IF NOT EXISTS Membro(
     CPF CHAR(11), 
     nome VARCHAR(100) NOT NULL,
-    numTelefone VARCHAR(15) NOT NULL,  
+    numTelefone VARCHAR(15) NOT NULL, 
+    dataNasc DATE NOT NULL,
     email VARCHAR(100) NOT NULL,
     telEmergencia VARCHAR(15) NOT NULL,
     Endereco_id INT,  
