@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS Membro(
     telEmergencia VARCHAR(15) NOT NULL,
     Endereco_id INT,  
     CadastroFamilia_id INT, 
+    foto BLOB,
     PRIMARY KEY (CPF),
     FOREIGN KEY (Endereco_id) REFERENCES Endereco (idEndereco),
     FOREIGN KEY (CadastroFamilia_id) REFERENCES CadastroFamilia (idFamilia)
