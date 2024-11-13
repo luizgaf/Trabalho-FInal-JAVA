@@ -3,11 +3,12 @@ package front;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import com.model.*;
 
 public class FrontEndCadastro extends JPanel{
 
     private JButton adicionarButton, adcMembro, voltarButton;
-    private JTextField endereco;
+    private JTextField logradouroField, numeroField, cepField, cidadeField, complementoField;
     private JComboBox<String> risco;
     private JFrame parentFrame;
 
@@ -21,15 +22,35 @@ public class FrontEndCadastro extends JPanel{
         label.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         add(label, BorderLayout.NORTH);
 
-        JPanel inputs = new JPanel(new FlowLayout());
+        JPanel inputs = new JPanel(new GridLayout(0, 1));
 
-        JPanel enderecoImput = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        endereco = new JTextField();
-        endereco.setPreferredSize(new Dimension(200, 30));
-        endereco.setText("Endereço");
-        addPlaceholderText(endereco, "Endereço");
-        enderecoImput.add(new JLabel ("Endereço:"));
-        enderecoImput.add(endereco);
+        JPanel enderecoImput = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
+
+        logradouroField = new JTextField();
+        numeroField = new JTextField();
+        cepField = new JTextField();
+        cidadeField = new JTextField();
+        complementoField = new JTextField();
+
+        logradouroField.setPreferredSize(new Dimension(200, 30));
+        numeroField.setPreferredSize(new Dimension(60, 30));
+        cepField.setPreferredSize(new Dimension(100, 30));
+        cidadeField.setPreferredSize(new Dimension(200, 30));
+        complementoField.setPreferredSize(new Dimension(200, 30));
+
+
+        enderecoImput.add(new JLabel ("Logadouro:  "));
+        enderecoImput.add(logradouroField);
+        enderecoImput.add(new JLabel ("Complemento:"));
+        enderecoImput.add(complementoField);
+        enderecoImput.add(new JLabel ("Número:     "));
+        enderecoImput.add(numeroField);
+        enderecoImput.add(new JLabel ("CEP:        "));
+        enderecoImput.add(cepField);
+        enderecoImput.add(new JLabel ("Cidade:     "));
+        enderecoImput.add(cidadeField);
+
+
         inputs.add(enderecoImput);
 
         JPanel riscoImput = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -62,26 +83,8 @@ public class FrontEndCadastro extends JPanel{
         buttonPanel.add(voltarButton);
     }
 
-    private void addPlaceholderText(JTextField field, String placeholder) {
-        field.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (field.getText().equals(placeholder)) {
-                    field.setText("");
-                }
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (field.getText().isEmpty()) {
-                    field.setText(placeholder);
-                }
-            }
-        });
-    }
-
     private void adicionarFamilia() {
-        System.out.println("Família adicionada: Endereço: " + (endereco.getText().equals("Endereço") ? "NULL" : endereco.getText()) + ", Risco: " + risco.getSelectedItem());
+        System.out.println(", Risco: " + risco.getSelectedItem());
     }
 
     private void adicionarMembro() {
@@ -91,6 +94,7 @@ public class FrontEndCadastro extends JPanel{
 
         JPanel cadastroPanel = new FrontEndCadastroMembro(adcMembro);
         adcMembro.add(cadastroPanel);
+        adcMembro.setResizable(false);
 
         adcMembro.setLocationRelativeTo(null);
         adcMembro.setVisible(true);

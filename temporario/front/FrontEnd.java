@@ -3,12 +3,14 @@ package front;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import com.model.*;
 
 public class FrontEnd extends JPanel{
     
     private FrontEndCadastro cadastroPanel;
 
     private JButton verCadastro, adcCadastro, btnSair;
+
 
     public FrontEnd(JFrame frame){
         setLayout(new BorderLayout());
@@ -46,11 +48,12 @@ public class FrontEnd extends JPanel{
 
     private void janelaCadastro(){
         JFrame frameCadastro = new JFrame("Cadastro de Família");
-        frameCadastro.setSize(800, 300);
+        frameCadastro.setSize(630, 500);
         frameCadastro.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         cadastroPanel = new FrontEndCadastro(frameCadastro);
         frameCadastro.add(cadastroPanel);
+        frameCadastro.setResizable(false);
 
         frameCadastro.setLocationRelativeTo(null);
         frameCadastro.setVisible(true);

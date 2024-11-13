@@ -11,6 +11,7 @@ public class MainActivity{
         FrontEnd frontEndPanel = new FrontEnd(frame);
         frame.add(frontEndPanel);
         frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
         // Exibindo a janela
         frame.setVisible(true);
     }
