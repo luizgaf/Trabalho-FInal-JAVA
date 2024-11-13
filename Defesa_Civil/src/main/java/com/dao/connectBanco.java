@@ -1,4 +1,4 @@
-package com.view.Defesa_Civil;
+package com.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

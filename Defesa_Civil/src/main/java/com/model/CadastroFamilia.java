@@ -25,8 +25,7 @@ public class CadastroFamilia {
     // Construtores, getters e setters
     public CadastroFamilia() {}
 
-    public CadastroFamilia(int idFamilia, String descricao, TipoRisco tipoRisco, TipoEmergencia tipoEmergencia) {
-        this.idFamilia = idFamilia;
+    public CadastroFamilia(String descricao, TipoRisco tipoRisco, TipoEmergencia tipoEmergencia) {
         this.descricao = descricao;
         this.tipoRisco = tipoRisco;
         this.tipoEmergencia = tipoEmergencia;
