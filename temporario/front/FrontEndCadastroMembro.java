@@ -2,6 +2,7 @@ package front;
 
 import java.awt.*;
 import javax.swing.*;
+import com.model.*;
 
 public class FrontEndCadastroMembro extends JPanel{
     
@@ -34,7 +35,24 @@ public class FrontEndCadastroMembro extends JPanel{
         bDField.setPreferredSize(new Dimension(200, 30));
         dataPanel.add(birthDate); dataPanel.add(bDField);
 
-        inputs.add(nomePanel); inputs.add(dataPanel);
+        JPanel dataPanel2 = new JPanel(new FlowLayout());
+        JLabel telefone = new JLabel("Telefone:");
+        dataPanel2.add(telefone);
+        JTextField telefoneField = new JTextField();
+        telefoneField.setPreferredSize(new Dimension(150, 30));
+        dataPanel2.add(telefoneField);
+
+        JLabel email = new JLabel("Email:");
+        JTextField emailField = new JTextField();
+        emailField.setPreferredSize(new Dimension(200, 30));
+        dataPanel2.add(email); dataPanel2.add(emailField);
+
+        JLabel telEmergencia = new JLabel("Telefone Emergencia:");
+        JTextField telEmergenciaField = new JTextField();
+        telEmergenciaField.setPreferredSize(new Dimension(150, 30));
+        dataPanel2.add(telEmergencia); dataPanel2.add(telEmergenciaField);
+
+        inputs.add(nomePanel); inputs.add(dataPanel); inputs.add(dataPanel2);
         add(inputs, BorderLayout.CENTER);
         
     }
