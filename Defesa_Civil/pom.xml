@@ -56,7 +56,6 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.32</version> <!-- Certifique-se de usar a versão mais recente -->
         </dependency>
 
         <!-- Dependência para testes com Spring Boot -->
@@ -76,8 +75,12 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <mainClass>com.view.Defesa_Civil.MainActivity</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>

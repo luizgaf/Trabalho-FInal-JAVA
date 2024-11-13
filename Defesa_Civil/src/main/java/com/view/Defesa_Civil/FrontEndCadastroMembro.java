@@ -1,8 +1,8 @@
-package front;
+package com.view.Defesa_Civil;
 
 import java.awt.*;
 import javax.swing.*;
-import com.model.*;
+
 
 public class FrontEndCadastroMembro extends JPanel{
     
