@@ -3,14 +3,12 @@ package front;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.JButton.*;
-import javax.swing.border.*;
 
 public class FrontEndCadastro extends JPanel{
 
     private JButton adicionarButton, adcMembro, voltarButton;
     private JTextField endereco;
-    private JSpinner risco;
+    private JComboBox<String> risco;
     private JFrame parentFrame;
 
     public FrontEndCadastro(JFrame parentFrame){
@@ -23,20 +21,25 @@ public class FrontEndCadastro extends JPanel{
         label.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         add(label, BorderLayout.NORTH);
 
-        JPanel inputs = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 30));
+        JPanel inputs = new JPanel(new FlowLayout());
 
+        JPanel enderecoImput = new JPanel(new FlowLayout(FlowLayout.CENTER));
         endereco = new JTextField();
         endereco.setPreferredSize(new Dimension(200, 30));
         endereco.setText("Endereço");
         addPlaceholderText(endereco, "Endereço");
-        inputs.add(endereco);
+        enderecoImput.add(new JLabel ("Endereço:"));
+        enderecoImput.add(endereco);
+        inputs.add(enderecoImput);
 
-        risco = new JSpinner(new SpinnerNumberModel(1, 1, 6, 1)); // valor inicial, mínimo, máximo, passo
-        risco.setPreferredSize(new Dimension(200, 30));
-        inputs.add(new JLabel("Nível de Risco:"));
-        inputs.add(risco);
-
-        inputs.add(endereco);
+        JPanel riscoImput = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        String[] riscoStrings = {"em risco", "risco alto", "risco extremo"};
+        risco = new JComboBox<>(riscoStrings); 
+        risco.setPreferredSize(new Dimension(150, 30));
+        riscoImput.add(new JLabel("Nível de Risco:"));
+        riscoImput.add(risco);
+        inputs.add(riscoImput);
+        
         add(inputs, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
@@ -78,11 +81,20 @@ public class FrontEndCadastro extends JPanel{
     }
 
     private void adicionarFamilia() {
-        System.out.println("Família adicionada: " + endereco.getText() + ", Risco: " + risco.getValue());
+        System.out.println("Família adicionada: Endereço: " + (endereco.getText().equals("Endereço") ? "NULL" : endereco.getText()) + ", Risco: " + risco.getSelectedItem());
     }
 
     private void adicionarMembro() {
-        System.out.println("Membro adicionado");
+        JFrame adcMembro = new JFrame("Adição de Membro");
+        adcMembro.setSize(800, 800);
+        adcMembro.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        JPanel cadastroPanel = new FrontEndCadastroMembro(adcMembro);
+        adcMembro.add(cadastroPanel);
+
+        adcMembro.setLocationRelativeTo(null);
+        adcMembro.setVisible(true);
+
     }
 
     private void voltar() {
