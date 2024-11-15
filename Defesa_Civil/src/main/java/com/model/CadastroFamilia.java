@@ -22,7 +22,7 @@ public class CadastroFamilia {
     @JoinColumn(name = "TipoEmergencia_id", referencedColumnName = "idEmergencia", nullable = false) // Definindo a chave estrangeira
     private TipoEmergencia tipoEmergencia;
 
-    // Construtores, getters e setters
+
     public CadastroFamilia() {}
 
     public CadastroFamilia(int idFamilia, String descricao, TipoRisco tipoRisco, TipoEmergencia tipoEmergencia) {
