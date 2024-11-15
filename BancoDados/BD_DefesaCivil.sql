@@ -3,8 +3,11 @@ USE DefesaCivil;
 
 CREATE TABLE IF NOT EXISTS Endereco(
     idEndereco INT AUTO_INCREMENT,
+    idEndereco INT AUTO_INCREMENT,
     logradouro VARCHAR(100) NOT NULL,
     numero INT NOT NULL,
+    cidade VARCHAR(50) NOT NULL,
+    CEP CHAR(8) NOT NULL, 
     cidade VARCHAR(50) NOT NULL,
     CEP CHAR(8) NOT NULL, 
     Complemento VARCHAR(100),
@@ -13,11 +16,13 @@ CREATE TABLE IF NOT EXISTS Endereco(
 
 CREATE TABLE IF NOT EXISTS TipoRisco(
     idRisco INT AUTO_INCREMENT,
+    idRisco INT AUTO_INCREMENT,
     categoria VARCHAR(100) NOT NULL,
     PRIMARY KEY (idRisco)
 );
 
 CREATE TABLE IF NOT EXISTS TipoEmergencia(
+    idEmergencia INT AUTO_INCREMENT,
     idEmergencia INT AUTO_INCREMENT,
     categoria VARCHAR(100) NOT NULL,
     PRIMARY KEY (idEmergencia)
@@ -36,6 +41,7 @@ CREATE TABLE IF NOT EXISTS CadastroFamilia(
 CREATE TABLE IF NOT EXISTS Membro(
     CPF CHAR(11), 
     nome VARCHAR(100) NOT NULL,
+    numTelefone VARCHAR(15) NOT NULL,  
     numTelefone VARCHAR(15) NOT NULL,  
     email VARCHAR(100) NOT NULL,
     telEmergencia VARCHAR(15) NOT NULL,
