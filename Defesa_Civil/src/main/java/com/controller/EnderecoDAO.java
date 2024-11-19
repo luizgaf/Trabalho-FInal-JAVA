@@ -1,17 +1,17 @@
 package com.controller;
 
-import javax.persistence.Entity;
+import com.model.Endereco;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import util.JPAUtil;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
-
-
-import com.model.CadastroFamilia;
-import com.model.Endereco;
-import org.springframework.transaction.annotation.Transactional;
-import util.JPAUtil;
-
 public class EnderecoDAO {
 
     public Endereco Salvar (Endereco endereco){
@@ -34,21 +34,6 @@ public class EnderecoDAO {
             em.close();
         }
     }
-
-    public Endereco BuscarPorID (int idEndereco){
-        EntityManager em = JPAUtil.getEntityManager();
-
-        try {
-            return em.find(Endereco.class, idEndereco);
-        }
-        catch (Exception ex){
-            System.err.println("Erro ao buscar id do enderço"+ ex.getMessage());
-            return null;
-        }finally {
-            em.close();
-        }
-    }
-
     public Endereco Atualiazar (Endereco endereco){
         EntityManager em = JPAUtil.getEntityManager();
         EntityTransaction transacao = em.getTransaction();
@@ -69,6 +54,22 @@ public class EnderecoDAO {
             em.close();
         }
     }
+
+    public Endereco BuscarPorID (int idEndereco){
+        EntityManager em = JPAUtil.getEntityManager();
+
+        try {
+            return em.find(Endereco.class, idEndereco);
+        }
+        catch (Exception ex){
+            System.err.println("Erro ao buscar id do enderço"+ ex.getMessage());
+            return null;
+        }finally {
+            em.close();
+        }
+    }
+
+
 
     public void Deletar(int idEndereco){
         EntityManager em = JPAUtil.getEntityManager();
@@ -102,6 +103,55 @@ public class EnderecoDAO {
             return null;
         } finally {
             em.close();
+        }
+    }
+    public Endereco PreencherEnderecoPorCep(String cep) {
+        String apiUrl = "https://viacep.com.br/ws/" + cep + "/json/";
+
+        try {
+
+            URL url = new URL(apiUrl);
+            HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+            conexao.setRequestMethod("GET");
+            conexao.setRequestProperty("Accept", "application/json");
+
+            if (conexao.getResponseCode() == 200) { // Sucesso
+
+                InputStreamReader leitor = new InputStreamReader(conexao.getInputStream());
+                JsonObject json = JsonParser.parseReader(leitor).getAsJsonObject();
+
+
+                Endereco endereco = new Endereco();
+                endereco.setLogradouro(json.get("logradouro").getAsString());
+                endereco.setCidade(json.get("localidade").getAsString());
+                endereco.setCEP(json.get("cep").getAsString());
+                endereco.setComplemento(json.has("complemento") ? json.get("complemento").getAsString() : null);
+
+                return endereco; // Retorna o endereço preenchido
+            } else {
+                System.err.println("Erro ao consultar o CEP: Código " + conexao.getResponseCode());
+                return null;
+            }
+        } catch (Exception e) {
+            System.err.println("Erro ao consultar o CEP: " + e.getMessage());
+            return null;
+        }
+    }
+
+
+    public Endereco SalvarEnderecoComCep(String cep, Endereco enderecoParcial) {
+        Endereco enderecoPreenchido = PreencherEnderecoPorCep(cep);
+
+        if (enderecoPreenchido != null) {
+
+            enderecoPreenchido.setNumero(enderecoParcial.getNumero());
+            enderecoPreenchido.setComplemento(enderecoParcial.getComplemento());
+
+
+            return Salvar(enderecoPreenchido);
+        } else {
+            System.err.println("Não foi possível preencher o endereço automaticamente.");
+            return null;
         }
     }
 }

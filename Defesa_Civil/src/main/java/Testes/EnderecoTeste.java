@@ -1,6 +1,9 @@
 package Testes;
 import com.controller.EnderecoDAO;
+import com.controller.MembroDAO;
 import com.model.Endereco;
+import com.model.Membro;
+
 import java.util.Scanner;
 import java.util.List;
 
@@ -31,9 +34,7 @@ public class EnderecoTeste {
         endereco.setCidade(input.nextLine());
 
 
-        input.close();
-
-        Endereco enderecoSalvo = enderecoDAO.Salvar(endereco);
+        /*Endereco enderecoSalvo = enderecoDAO.Salvar(endereco);
 
         if (enderecoSalvo != null) {
             System.out.println("Endereço salvo com sucesso!");
@@ -41,7 +42,7 @@ public class EnderecoTeste {
         } else {
             System.err.println("Erro ao salvar Endereço");
         }
-
+        */
 
 
         List<Endereco> enderecos = enderecoDAO.ListarEndereco();
@@ -59,6 +60,46 @@ public class EnderecoTeste {
         } else {
             System.out.println("Nenhum endereço encontrado em ");
         }
+
+        Membro membro = new Membro();
+        MembroDAO membroDAO = new MembroDAO();
+
+
+        System.out.println("Digite seu CPF");
+        membro.setCPF(input.nextLine());
+
+
+        System.out.println("Digite o nome");
+        membro.setNome(input.nextLine());
+
+
+        System.out.println("Digite o numero de telefone");
+        membro.setNumTelefone(input.nextLine());
+
+
+        System.out.println("Digite o Email");
+        membro.setEmail(input.nextLine());
+
+        System.out.println("Digite um contato de emergencia");
+        membro.setNumEmergencia(input.nextLine());
+
+        /*
+        System.out.println("Digite a data de nascimento");
+        membro.setDataNasc(input.nextLine());
+        */
+        System.out.println("Endereço" + endereco.getCEP() + " , " + endereco.getLogradouro() + " , " + endereco.getNumero());
+        membro.setEndereco(endereco);
+
+        input.close();
+        Membro membroSalvo = membroDAO.Salvar(membro);
+
+        if (membroSalvo != null) {
+            System.out.println("membro salvo com sucesso!");
+            System.out.println("Membro salvo: " + membroSalvo.getNome());
+        } else {
+            System.err.println("Erro ao salvar membro");
+        }
+
     }
 }
 

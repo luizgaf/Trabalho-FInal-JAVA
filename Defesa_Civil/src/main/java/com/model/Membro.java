@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="membro")
+@Table(name = "membro")
 public class Membro {
 
     @Id
@@ -17,7 +17,7 @@ public class Membro {
     @Column(name = "numTelefone", nullable = false)
     private String numTelefone;
 
-    @Column(name = " dataNasc", nullable = false)
+    @Column(name = "dataNasc", nullable = true)
     private LocalDate DataNasc;
 
     @Column(name = "email", nullable = false, unique = true)
@@ -31,13 +31,17 @@ public class Membro {
     private Endereco endereco;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "CadastroFamilia_id", referencedColumnName = "idFamilia", nullable = false)
+    @JoinColumn(name = "CadastroFamilia_id", referencedColumnName = "idFamilia", nullable = true)
     private CadastroFamilia cadastroFamilia;
 
+    // Novo atributo para armazenar a foto
+    @Lob
+    @Column(name = "foto")
+    private byte[] foto;
 
     public Membro() {}
 
-    public Membro(String CPF, String nome, String numTelefone, LocalDate DataNasc, String email, String numEmergencia, Endereco endereco, CadastroFamilia cadastroFamilia){
+    public Membro(String CPF, String nome, String numTelefone, LocalDate DataNasc, String email, String numEmergencia, Endereco endereco, CadastroFamilia cadastroFamilia, byte[] foto) {
         this.CPF = CPF;
         this.nome = nome;
         this.numTelefone = numTelefone;
@@ -46,8 +50,10 @@ public class Membro {
         this.numEmergencia = numEmergencia;
         this.endereco = endereco;
         this.cadastroFamilia = cadastroFamilia;
+        this.foto = foto;
     }
 
+    // Getters e Setters
     public String getCPF() {
         return CPF;
     }
@@ -56,7 +62,7 @@ public class Membro {
         this.CPF = CPF;
     }
 
-    public String getNome(){
+    public String getNome() {
         return nome;
     }
 
@@ -110,5 +116,13 @@ public class Membro {
 
     public void setCadastroFamilia(CadastroFamilia cadastroFamilia) {
         this.cadastroFamilia = cadastroFamilia;
+    }
+
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
     }
 }
